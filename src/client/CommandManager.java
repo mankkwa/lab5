@@ -14,6 +14,9 @@ enum CommandType {
     UPDATE;
 }
 
+/**
+ * Класс для работы с командами
+ */
 public class CommandManager {
 
     public static final Command[] commands = {

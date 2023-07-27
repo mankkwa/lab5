@@ -6,6 +6,10 @@ import models.Organization;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Команда упдате - обновить значение элемента коллекции
+ */
+
 public class Update implements Command{
     @Override
     public void execute(List<Object> args) {

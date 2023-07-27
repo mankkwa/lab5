@@ -4,6 +4,9 @@ import models.Organization;
 
 import java.time.ZonedDateTime;
 
+/**
+ * Класс для генерации айдишника
+ */
 public class Generator {
     private static int availableId = 1;
 

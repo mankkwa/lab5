@@ -6,6 +6,9 @@ import database.dao.*;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Команда add - добавляем элемент в коллекцию
+ */
 public class Add implements Command {
     @Override
     public void execute(List<Object> args) {

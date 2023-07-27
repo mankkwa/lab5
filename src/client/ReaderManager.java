@@ -7,6 +7,9 @@ import client.handlers.InputHandler;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Класс для обработки команды и ее взаимодействия с входными данными
+ */
 public class ReaderManager {
     private static InputHandler reader;
     private static ArrayList<InputHandler> handlers = new ArrayList<>();
@@ -28,5 +31,5 @@ public class ReaderManager {
         reader = handlers.get(handlers.size() - 1);
     }
 
-    //метод для чтения из файла
+    //метод для смены на чтение из файла
 }
