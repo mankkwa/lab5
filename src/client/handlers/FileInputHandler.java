@@ -19,11 +19,11 @@ public class FileInputHandler extends InputHandler {
             while (scanner.hasNextLine()) {
                 line = scanner.nextLine().trim();
                 //.trim() осуществляет обрезание пробелов
-
             }
+
         } finally {
             scanner.close();
         }
-        return line.split(" ")[0];
+        return line;
     }
 }
