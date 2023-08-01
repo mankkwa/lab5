@@ -1,9 +1,11 @@
 package client.handlers;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class FileInputHandler extends InputHandler{
+public class FileInputHandler extends InputHandler {
     private final Scanner scanner;
 
     public FileInputHandler(Scanner scanner) {
@@ -12,6 +14,16 @@ public class FileInputHandler extends InputHandler{
 
     @Override
     public String readInput() throws IOException {
-        return null;
+        String line = "";
+        try {
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine().trim();
+                //.trim() осуществляет обрезание пробелов
+
+            }
+        } finally {
+            scanner.close();
+        }
+        return line.split(" ")[0];
     }
 }
