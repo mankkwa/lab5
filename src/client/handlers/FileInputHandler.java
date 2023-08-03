@@ -24,6 +24,6 @@ public class FileInputHandler extends InputHandler {
         } finally {
             scanner.close();
         }
-        return line;
+        return line.split(" ")[0];
     }
 }

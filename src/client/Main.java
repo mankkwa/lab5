@@ -15,25 +15,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        ConsoleInputHandler cih = new ConsoleInputHandler();
-        //System.out.println(cih.readInput());
-
-        File file = new File("C:\\Users\\mankk\\Учеба\\2 семестр\\lab5\\src\\m.txt");
-        Scanner scForFile = new Scanner(file);
-        FileInputHandler fih = new FileInputHandler(scForFile);
-        //System.out.println(fih.readInput());
-
-        InputHandler ih = new ConsoleInputHandler();
-
-        Scanner scanner = new Scanner(System.in);
-        int number = scanner.nextInt();
-
-        if (number>10){
-            ih = new ConsoleInputHandler();
-        } else{
-            ih = new FileInputHandler(scForFile);
-        }
-        System.out.println(ih.readInput());
+        CommandManager manager = new CommandManager();
+        manager.whichCommand();
 
     }
 
