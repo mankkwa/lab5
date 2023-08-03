@@ -13,7 +13,7 @@ public class FileInputHandler extends InputHandler {
     }
 
     @Override
-    public String readInput() throws IOException {
+    public String readInput() {
         String line = "";
         try {
             while (scanner.hasNextLine()) {
