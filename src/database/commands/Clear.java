@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class Clear implements Command{
     @Override
-    public void execute(List<Object> args) {
-        PriorityQueueDAO.organizations.clear();
+    public void execute(Object obj) {
+        //PriorityQueueDAO.organizations.clear();
     }
 
     @Override

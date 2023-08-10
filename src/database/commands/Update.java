@@ -10,10 +10,12 @@ import java.util.List;
  * Команда упдате - обновить значение элемента коллекции
  */
 
-public class Update implements Command{
+public class Update implements Command {
     @Override
-    public void execute(List<Object> args) {
-        int id = (int)args.get(0);
+    public void execute(Object obj) {
+
+    }
+    /*
 
         if(PriorityQueueDAO.organizations.removeIf(u -> u.getId() == id)){
             Organization organization = (Organization)args.get(0);
@@ -25,9 +27,10 @@ public class Update implements Command{
             System.out.println("Такого элемента не существует");
         }
     }
-
+*/
     @Override
     public List<Class> getArgsType() {
         return Arrays.asList();
     }
-}
+
+    }

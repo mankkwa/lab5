@@ -7,8 +7,7 @@ public class Organization {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
-    private java.time.
-            ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private java.time.ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Float annualTurnover; //Поле не может быть null, Значение поля должно быть больше 0
     private String fullName; //Длина строки не должна быть больше 1637, Строка не может быть пустой, Поле может быть null
     private Integer employeesCount; //Поле не может быть null, Значение поля должно быть больше 0
@@ -24,6 +23,13 @@ public class Organization {
         this.employeesCount = employeesCount;
         this.type = type;
         this.postalAddress = postalAddress;
+    }
+
+    public Organization(int askId, String name, Coordinates coordinates, ZonedDateTime creationDate, Float annualTurnover, OrganizationType askType, Integer employeesCount, Address askPostalAddress, String askFullName) {
+    }
+
+    public Organization() {
+
     }
 
     public static long getCurrentId() {
