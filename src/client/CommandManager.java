@@ -8,6 +8,10 @@ import database.commands.Add;
 import database.commands.Clear;
 import database.commands.Command;
 import database.commands.Update;
+import database.dao.DAO;
+import database.dao.PriorityQueueDAO;
+import models.Organization;
+import models.exceptions.EndException;
 
 
 import java.io.File;
@@ -28,8 +32,55 @@ public class CommandManager {
             new Update(),
     };
 
+    public static Organization whichFunction (int commandIndex) throws EndException {
+        Organization org = new Organization();
+        AskIn ask = new AskIn();
+        DAO collection = new PriorityQueueDAO();
+        switch (commandIndex){
+            case 0:
+                System.out.println("Вызвана команда add");
+                org.setName(ask.askName(ih));
+                org.setType(ask.askType(ih));
+                org.setPostalAddress(ask.askPostalAddress(ih));
+                org.setCoordinates(ask.askCoordinates(ih));
+                org.setEmployeesCount(ask.askEmployeesCount(ih));
+                org.setAnnualTurnover(ask.askAnnualTurnover(ih));
+                org.setFullName(ask.askFullName(ih));
+                break;
+            case  1:
+                System.out.println("Вызвана команда clear");
+                collection.clear();
+                break;
+            case 2:
+                System.out.println("Вызвана команда update");
+                Long id = 1L;
+                try{
+                    id = ask.askId(ih);
+                } catch (EndException e){
+                    System.err.println(e.getMessage());
+                }
+                if (collection.get(id) != null){
+                    try{
+                    org.setName(ask.askName(ih));
+                    org.setType(ask.askType(ih));
+                    org.setPostalAddress(ask.askPostalAddress(ih));
+                    org.setCoordinates(ask.askCoordinates(ih));
+                    org.setEmployeesCount(ask.askEmployeesCount(ih));
+                    org.setAnnualTurnover(ask.askAnnualTurnover(ih));
+                    org.setFullName(ask.askFullName(ih));
+                } catch (EndException e){
+                        System.err.println(e.getMessage());
+                    }
+                } else {
+                    System.err.println("Такого элемента нет!");
+                }
+                break;
+        }
+        return org;
+    }
+
     public static void whichCommand() throws Exception{
-        System.out.println("Введи что-нибудь чел блин:");
+        System.out.println("Выбери файл или консоль:");
         String command = null;
         String typeOfInput;
        try {
@@ -48,23 +99,23 @@ public class CommandManager {
                         throw new IOException();
                     }
                 } else {
-                    throw new IllegalArgumentException("то, что ты ввел - лютый кринж");
+                    throw new IllegalArgumentException("Некорректный ввод!");
                 }
             } else {
-                throw new IllegalArgumentException("этой строки нет как и твоей совести");
+                throw new IllegalArgumentException("Ты ввел пустоту!");
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             whichCommand();
             return;
         } catch (IOException exception){
-            System.out.println("у тебя файл пустой чел!");
+            System.out.println("У тебя файл пустой!");
             whichCommand();
             return;
         }
         int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
-        Add add = new Add();
-        commands[commandIndex].execute(add);
+        Organization org = whichFunction(commandIndex);
+        commands[commandIndex].execute(org);
         whichCommand();
         }
     }

@@ -1,5 +1,6 @@
 package database.commands;
 
+import database.dao.DAO;
 import database.dao.PriorityQueueDAO;
 import models.Organization;
 
@@ -11,9 +12,18 @@ import java.util.List;
  */
 
 public class Update implements Command {
-    @Override
-    public void execute(Object obj) {
+    private static final DAO priorityQueueDAO = new PriorityQueueDAO();
 
+    @Override
+    public void execute(Object newObject) {
+        Organization org = (Organization) newObject;
+        Long id = org.getId();
+        if (id == null){
+            System.out.println("Элемент не будет обновлён :(");
+        } else {
+            priorityQueueDAO.update(id, org);
+            System.out.print("Элемент обновлён :)\n");
+        }
     }
     /*
 

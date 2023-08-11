@@ -8,11 +8,11 @@ import java.util.*;
 
 public final class PriorityQueueDAO implements DAO {
     private final PriorityQueue<Organization> collection = new PriorityQueue<>();
-    private static int availableId = 1;
+    private static Long availableId = 1L;
     private final ZonedDateTime initDate;
-    private final Generator generator = new Generator();
+    private static final Generator generator = new Generator();
 
-    public PriorityQueueDAO(PriorityQueueDAO organizations){
+    public PriorityQueueDAO(){
         initDate = ZonedDateTime.now();
     }
 
@@ -22,23 +22,17 @@ public final class PriorityQueueDAO implements DAO {
     }
 
     @Override
-    public int add(Organization organization){
-        collection.add(new Organization(availableId,
-                organization.getName(),
-                organization.getCoordinates(),
-                organization.getCreationDate(),
-                organization.getAnnualTurnover(),
-                organization.getType(),
-                organization.getEmployeesCount(),
-                organization.getPostalAddress(),
-                organization.getFullName()));
+    public Long add(Organization organization){
+        collection.add(organization);
+        generator.generateID(organization);
+        generator.generateCreationDate(organization);
         return availableId++;
     }
 
     @Override
-    public void update(int id, Organization updOrganization) {
+    public void update(Long id, Organization updOrganization) {
         Organization thatOrganization = get(id);
-        if (thatOrganization.getId() == id) {
+        if (thatOrganization != null) {
             thatOrganization.setName(updOrganization.getName());
             thatOrganization.setCoordinates(updOrganization.getCoordinates());
             thatOrganization.setCreationDate(updOrganization.getCreationDate());
@@ -51,7 +45,7 @@ public final class PriorityQueueDAO implements DAO {
     }
 
     @Override
-    public void remove(int id) {
+    public void remove(Long id) {
         Organization thatOrganization = get(id);
         if (thatOrganization!=null){
             collection.remove(thatOrganization);
@@ -59,9 +53,14 @@ public final class PriorityQueueDAO implements DAO {
     }
 
     @Override
-    public Organization get(int id) {
+    public void clear() {
+        collection.clear();
+    }
+
+    @Override
+    public Organization get(Long id) {
         for (Organization organization: collection){
-            if (organization.getId()==id){
+            if (Objects.equals(organization.getId(), id)){
                 return organization;
             }
         }
@@ -79,18 +78,13 @@ public final class PriorityQueueDAO implements DAO {
     }
 
     @Override
-    public int getAvailableId(){
+    public Long getAvailableId(){
         return availableId;
     }
 
     @Override
     public Organization show() {
         return null;
-    }
-
-    @Override
-    public void sort() {
-
     }
 
 }
