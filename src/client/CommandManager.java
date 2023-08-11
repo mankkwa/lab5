@@ -31,7 +31,9 @@ public class CommandManager {
             new Clear(),
             new Update(),
     };
-
+    /**
+     * whichFunction - функция для работы с запросом пользователя
+     */
     public static Organization whichFunction (int commandIndex) throws EndException {
         Organization org = new Organization();
         AskIn ask = new AskIn();
