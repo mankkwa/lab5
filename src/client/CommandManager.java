@@ -3,7 +3,6 @@ package client;
 import client.handlers.ConsoleInputHandler;
 import client.handlers.FileInputHandler;
 import client.handlers.InputHandler;
-import database.AskIn;
 import database.commands.Add;
 import database.commands.Clear;
 import database.commands.Command;

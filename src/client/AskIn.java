@@ -1,4 +1,4 @@
-package database;
+package client;
 
 import client.CommandType;
 import client.handlers.ConsoleInputHandler;
