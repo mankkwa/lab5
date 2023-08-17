@@ -25,6 +25,17 @@ public class Coordinates {
         this.y = y;
     }
 
+    /**
+     * метод compareTo для сравнения параметров координат
+     */
+    public int compareTo(Coordinates other) {
+        int xComparison = this.x.compareTo(other.x);
+        if (xComparison != 0) {
+            return xComparison;
+        }
+        return this.y.compareTo(other.y);
+    }
+
     @Override
     public String toString() {
         return "Coordinates" +

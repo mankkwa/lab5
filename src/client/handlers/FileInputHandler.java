@@ -11,7 +11,6 @@ public class FileInputHandler extends InputHandler {
     public FileInputHandler(Scanner scanner) {
         this.scanner = scanner;
     }
-
     @Override
     public String readInput() {
         String line = "";

@@ -1,8 +1,9 @@
 package models;
 
+
 import java.time.ZonedDateTime;
 
-public class Organization {
+public class Organization implements Comparable<Organization>{
     public static long CurrentId = 1;
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -125,5 +126,52 @@ public class Organization {
                 "\n\ttype=" + type +
                 "\n\tpostalAddress= " + postalAddress;
     }
+
+
+    /**
+    Метод для сравнения элементов коллекции
+     принцип прост - сравниваем this и other и возвращаем результат!
+     */
+
+    @Override
+    public int compareTo(Organization other) {
+
+        int nameComparison = this.name.compareTo(other.name);
+        if (nameComparison != 0) {
+            return nameComparison;
+        }
+
+        int coordinatesComparison = this.coordinates.compareTo(other.coordinates);
+        if (coordinatesComparison != 0){
+            return coordinatesComparison;
+        }
+
+        int creationDateComparison = this.creationDate.compareTo(other.creationDate);
+        if (creationDateComparison != 0) {
+            return creationDateComparison;
+        }
+
+        int annualTurnoverComparison = Float.compare(this.annualTurnover, other.annualTurnover);
+        if (annualTurnoverComparison != 0) {
+            return annualTurnoverComparison;
+        }
+
+        int fullComparison = this.fullName.compareTo(other.fullName);
+        if (fullComparison != 0){
+            return fullComparison;
+        }
+
+        int employeesCountComparison = Integer.compare(this.employeesCount, other.employeesCount);
+        if (employeesCountComparison != 0){
+            return employeesCountComparison;
+        }
+
+        int typeComparison = this.type.compareTo(other.type);
+        if (typeComparison != 0){
+            return typeComparison;
+        }
+        return this.postalAddress.compareTo(other.postalAddress);
+    }
+
 
 }

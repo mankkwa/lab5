@@ -23,7 +23,7 @@ import java.util.Scanner;
 public class CommandManager {
 
     private static InputHandler ih;
-
+    private static PriorityQueueDAO priorityQueueDAO = new PriorityQueueDAO();
 
     public static final Command[] commands = {
             new Add(),
@@ -80,10 +80,11 @@ public class CommandManager {
         return org;
     }
 
-    public static void whichCommand() throws Exception{
-        System.out.println("Выбери файл или консоль:");
+    public static void whichCommand(String fileName) throws Exception{
         String command = null;
         String typeOfInput;
+        System.out.println("Выбери файл или консоль:");
+
        try {
             File file = new File("C:\\Users\\mankk\\Учеба\\2 семестр\\lab5\\src\\m.txt");
             Scanner scForFile = new Scanner(file);
@@ -107,16 +108,17 @@ public class CommandManager {
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            whichCommand();
+            whichCommand(fileName);
             return;
         } catch (IOException exception){
             System.out.println("У тебя файл пустой!");
-            whichCommand();
+            whichCommand(fileName);
             return;
         }
         int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
         Organization org = whichFunction(commandIndex);
         commands[commandIndex].execute(org);
-        whichCommand();
+        priorityQueueDAO.saveCollectionToFile(fileName);
+        whichCommand(fileName);
         }
     }

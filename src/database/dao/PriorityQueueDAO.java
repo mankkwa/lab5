@@ -1,13 +1,16 @@
 package database.dao;
 
 import client.Generator;
+import client.Main;
+import database.FileManager;
 import models.Organization;
 
 import java.time.ZonedDateTime;
 import java.util.*;
 
 public final class PriorityQueueDAO implements DAO {
-    private final PriorityQueue<Organization> collection = new PriorityQueue<>();
+    private static PriorityQueueDAO pqd = new PriorityQueueDAO();
+    private static PriorityQueue<Organization> collection = new PriorityQueue<>();
     private static Long availableId = 1L;
     private final ZonedDateTime initDate;
     private static final Generator generator = new Generator();
@@ -69,12 +72,12 @@ public final class PriorityQueueDAO implements DAO {
 
     @Override
     public Collection<Organization> getAll() {
-        return null;
+        return collection;
     }
 
     @Override
     public int size() {
-        return 0;
+        return collection.size();
     }
 
     @Override
@@ -85,6 +88,14 @@ public final class PriorityQueueDAO implements DAO {
     @Override
     public Organization show() {
         return null;
+    }
+
+    @Override
+    public void sort(){
+    }
+
+    public void saveCollectionToFile(String output) {
+        FileManager.writeCollection(pqd.getAll(), output);
     }
 
 }

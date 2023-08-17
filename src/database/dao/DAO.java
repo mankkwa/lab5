@@ -4,6 +4,7 @@ import models.Organization;
 
 import java.time.ZonedDateTime;
 import java.util.Collection;
+
 public interface DAO {
     Long add(Organization organization);
     void update(Long id, Organization organization);
@@ -15,4 +16,5 @@ public interface DAO {
     Long getAvailableId();
     Organization show();
     ZonedDateTime getInitDate();
+    void sort();
 }

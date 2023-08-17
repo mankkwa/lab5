@@ -45,6 +45,28 @@ public class Location {
         this.name = name;
     }
 
+    /**
+     * метод compareTo для сравнения параметров локации
+     */
+    public int compareTo (Location other){
+        int xComparison = this.x.compareTo(other.x);
+        if (xComparison != 0){
+            return xComparison;
+        }
+
+        int yComparison = Float.compare(this.y, other.y);
+        if (yComparison != 0){
+            return yComparison;
+        }
+
+        int zComparison = Long.compare(this.z, other.z);
+        if (zComparison != 0){
+            return zComparison;
+        }
+
+        return this.name.compareTo(other.name);
+    }
+
     @Override
     public String toString() {
         return "Location" +

@@ -10,7 +10,6 @@ import models.OrganizationType;
 import models.exceptions.EndException;
 
 
-
 public class AskIn {
     public static boolean FRIEND_DETECTOR;
 

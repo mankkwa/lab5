@@ -25,6 +25,17 @@ public class Address {
         this.town = town;
     }
 
+    /**
+     * метод compareTo для сравнения параметров адреса
+     */
+    public int compareTo(Address other){
+        int streetComparison = this.street.compareTo(other.street);
+        if (streetComparison != 0) {
+            return streetComparison;
+        }
+        return this.town.compareTo(other.town);
+    }
+
     @Override
     public String toString() {
         return "Address" +
