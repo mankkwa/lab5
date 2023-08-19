@@ -1,5 +1,6 @@
 package database.dao;
 
+import database.FileManager;
 import models.Organization;
 
 import java.time.ZonedDateTime;
@@ -17,4 +18,6 @@ public interface DAO {
     Collection<Organization> show();
     ZonedDateTime getInitDate();
     void sort();
+    void readCollection(String o);
+    void saveCollectionToFile(String o);
 }

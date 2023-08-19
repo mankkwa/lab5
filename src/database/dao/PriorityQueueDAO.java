@@ -94,8 +94,14 @@ public final class PriorityQueueDAO implements DAO {
     public void sort(){
     }
 
+    @Override
     public void saveCollectionToFile(String output) {
         FileManager.writeCollection(pqd.getAll(), output);
+    }
+
+    @Override
+    public void readCollection(String input){
+        collection = FileManager.readCollection(input);
     }
 
 }
