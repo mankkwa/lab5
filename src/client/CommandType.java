@@ -8,5 +8,6 @@ public enum CommandType {
     CLEAR,
     UPDATE,
     EXIT,
-    SAVE;
+    SAVE,
+    SHOW;
 }

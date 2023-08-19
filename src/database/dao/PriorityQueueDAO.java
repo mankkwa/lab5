@@ -1,7 +1,6 @@
 package database.dao;
 
 import client.Generator;
-import client.Main;
 import database.FileManager;
 import models.Organization;
 
@@ -86,8 +85,9 @@ public final class PriorityQueueDAO implements DAO {
     }
 
     @Override
-    public Organization show() {
-        return null;
+    public Collection<Organization> show() {
+        if (collection.isEmpty()) return null;
+        return (pqd.getAll());
     }
 
     @Override

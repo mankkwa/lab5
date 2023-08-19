@@ -14,7 +14,7 @@ public interface DAO {
     Collection<Organization> getAll();
     int size();
     Long getAvailableId();
-    Organization show();
+    Collection<Organization> show();
     ZonedDateTime getInitDate();
     void sort();
 }

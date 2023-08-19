@@ -28,6 +28,7 @@ public class CommandManager {
             new Update(),
             new Exit(),
             new Save(),
+            new Show(),
     };
     /**
      * whichFunction - функция для работы с запросом пользователя
@@ -80,6 +81,9 @@ public class CommandManager {
             case 4:
                 System.out.println("< Вызвана команда save >");
                 priorityQueueDAO.saveCollectionToFile(fileName);
+                break;
+            case 5:
+                System.out.println("< Вызвана команда show >");
                 break;
         }
         return org;
