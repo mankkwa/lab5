@@ -18,9 +18,4 @@ public class Add implements Command {
             priorityQueueDAO.add(org);
             System.out.println("Элемент добавлен в коллекцию!");
         }
-
-    @Override
-    public List<Class> getArgsType() {
-        return Arrays.asList(Organization.class);
-    }
 }

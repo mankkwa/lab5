@@ -6,5 +6,7 @@ package client;
 public enum CommandType {
     ADD,
     CLEAR,
-    UPDATE;
+    UPDATE,
+    EXIT,
+    SAVE;
 }

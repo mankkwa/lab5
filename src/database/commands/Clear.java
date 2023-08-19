@@ -15,16 +15,7 @@ public class Clear implements Command{
     @Override
     public void execute(Object obj) {
         //тут я воспользовалась просто методом clear, не стала изобретать велосипед
-        if (priorityQueueDAO.size() != 0){
-            priorityQueueDAO.clear();
-            System.out.println("Коллекция очищена.");
-        } else {
-            System.err.println("Коллекция изначально пуста.");
-        }
-    }
-
-    @Override
-    public List<Class> getArgsType() {
-        return Arrays.asList();
+        priorityQueueDAO.clear();
+        System.out.println("Коллекция очищена.");
     }
 }

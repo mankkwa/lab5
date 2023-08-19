@@ -21,28 +21,10 @@ public class Update implements Command {
         //в ином случае - обновлен
         Long id = org.getId();
         if (id == null){
-            System.out.println("Элемент не будет обновлён :(");
+            System.out.println("Элемент не будет обновлён, ведь такого id не существует :(");
         } else {
             priorityQueueDAO.update(id, org);
             System.out.print("Элемент обновлён :)\n");
         }
     }
-    /*
-
-        if(PriorityQueueDAO.organizations.removeIf(u -> u.getId() == id)){
-            Organization organization = (Organization)args.get(0);
-            organization.setId((long)id);
-            PriorityQueueDAO.organizations.add(organization);
-            System.out.println("Элемент успешно сменен");
-        }
-        else{
-            System.out.println("Такого элемента не существует");
-        }
-    }
-*/
-    @Override
-    public List<Class> getArgsType() {
-        return Arrays.asList();
-    }
-
-    }
+}

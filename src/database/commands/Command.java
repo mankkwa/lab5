@@ -10,8 +10,4 @@ import java.util.Locale;
  */
 public interface Command {
     void execute(Object obj) throws EndException;
-    List<Class> getArgsType();
-    default String name(){
-        return getClass().getSimpleName().toLowerCase(Locale.getDefault());
-    }
 }

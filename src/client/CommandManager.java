@@ -3,10 +3,7 @@ package client;
 import client.handlers.ConsoleInputHandler;
 import client.handlers.FileInputHandler;
 import client.handlers.InputHandler;
-import database.commands.Add;
-import database.commands.Clear;
-import database.commands.Command;
-import database.commands.Update;
+import database.commands.*;
 import database.dao.DAO;
 import database.dao.PriorityQueueDAO;
 import models.Organization;
@@ -29,17 +26,19 @@ public class CommandManager {
             new Add(),
             new Clear(),
             new Update(),
+            new Exit(),
+            new Save(),
     };
     /**
      * whichFunction - функция для работы с запросом пользователя
      */
-    public static Organization whichFunction (int commandIndex) throws EndException {
+    public static Organization whichFunction (int commandIndex, String fileName) throws EndException {
         Organization org = new Organization();
         AskIn ask = new AskIn();
         DAO collection = new PriorityQueueDAO();
         switch (commandIndex){
             case 0:
-                System.out.println("Вызвана команда add");
+                System.out.println("< Вызвана команда add >");
                 org.setName(ask.askName(ih));
                 org.setType(ask.askType(ih));
                 org.setPostalAddress(ask.askPostalAddress(ih));
@@ -49,11 +48,10 @@ public class CommandManager {
                 org.setFullName(ask.askFullName(ih));
                 break;
             case  1:
-                System.out.println("Вызвана команда clear");
-                collection.clear();
+                System.out.println("< Вызвана команда clear >");
                 break;
             case 2:
-                System.out.println("Вызвана команда update");
+                System.out.println("< Вызвана команда update >");
                 Long id = 1L;
                 try{
                     id = ask.askId(ih);
@@ -76,6 +74,13 @@ public class CommandManager {
                     System.err.println("Такого элемента нет!");
                 }
                 break;
+            case 3:
+                System.out.println("< Вызвана команда exit >");
+                break;
+            case 4:
+                System.out.println("< Вызвана команда save >");
+                priorityQueueDAO.saveCollectionToFile(fileName);
+                break;
         }
         return org;
     }
@@ -84,7 +89,6 @@ public class CommandManager {
         String command = null;
         String typeOfInput;
         System.out.println("Выбери файл или консоль:");
-
        try {
             File file = new File("C:\\Users\\mankk\\Учеба\\2 семестр\\lab5\\src\\m.txt");
             Scanner scForFile = new Scanner(file);
@@ -116,9 +120,8 @@ public class CommandManager {
             return;
         }
         int commandIndex = CommandType.valueOf(command.toUpperCase()).ordinal();
-        Organization org = whichFunction(commandIndex);
+        Organization org = whichFunction(commandIndex, fileName);
         commands[commandIndex].execute(org);
-        priorityQueueDAO.saveCollectionToFile(fileName);
         whichCommand(fileName);
         }
     }
