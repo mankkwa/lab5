@@ -16,6 +16,7 @@ public class Add implements Command {
     public void execute (Object newObject) {
             Organization org = (Organization) newObject;
             priorityQueueDAO.add(org);
+            priorityQueueDAO.sort();
             System.out.println("Элемент добавлен в коллекцию!");
         }
 }

@@ -38,8 +38,9 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address" +
-                "\n\t\tstreet=" + street +
-                "\n\t\ttown=" + town;
+        return "Address (" +
+                "street = " + street +
+                ", town = " + town +
+                ')';
     }
 }

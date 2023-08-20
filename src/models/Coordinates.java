@@ -38,8 +38,9 @@ public class Coordinates {
 
     @Override
     public String toString() {
-        return "Coordinates" +
-                "\n\t\tx=" + x +
-                "\n\t\ty=" + y;
+        return "Coordinates (" +
+                "x = " + x +
+                ", y = " + y +
+                ')';
     }
 }

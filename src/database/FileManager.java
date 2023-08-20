@@ -1,16 +1,21 @@
 package database;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import client.Converter;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.google.gson.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Organization;
 
 import java.io.*;
+import java.time.ZonedDateTime;
 import java.util.*;
 
 public class FileManager {
-    private static final Gson gson = new Gson();
+    private static final Gson gson = new GsonBuilder().registerTypeAdapter(ZonedDateTime.class, new Converter()).create();
 
-    public static void writeCollection(Collection<Organization> data, String output) {
+    public static void writeCollection(Collection<?> data, String output) {
         if (output != null) {
             try (OutputStreamWriter writer = new FileWriter(output)) {
                 writer.write(gson.toJson(data));
@@ -24,19 +29,23 @@ public class FileManager {
 
     public static PriorityQueue<Organization> readCollection(String input){
         if (input != null) {
-            try (Scanner reader = new Scanner(input)) {
-                PriorityQueue<Organization> collection;
-                //Здесь я использовала класс библиотеки TypeToken
-                //Сначала определила желаемый тип коллекции
-                TypeToken<PriorityQueue<Organization>> typeToken = new TypeToken<PriorityQueue<Organization>>() {};
-                //Далее получаем тип коллекции при помощи .getType(), используя уже выше определенный typeToken
-                java.lang.reflect.Type collectionType = typeToken.getType();
-                //затем здесь происходит десериализация в коллекцию при помощи fromJson
-                collection = gson.fromJson(reader.nextLine(), collectionType);
+            try {
+                Scanner scanner = new Scanner(new File(input));
+                //здесь использую стринг буилдер, чтобы нормально собрать строку, тк просто стринг неизменяемый
+                StringBuilder builder = new StringBuilder();
+                PriorityQueue<Organization> collection = new PriorityQueue<>();
+                //здесь просто по сути склеиваем из говна и палок одну целую строку, пока сканер что то видит
+                //append - как раз таки им и склеиваем
+                while (scanner.hasNext()){
+                    builder.append(scanner.next());
+                }
+                //тута происходит десериализация строки builder.toString() в массив organization
+                //потом просто преобразуем в список, тк приорити куеуе не умеет так, а потом уже с addAll все добавляем
+                collection.addAll(Arrays.asList(gson.fromJson(builder.toString(), Organization[].class)));
                 System.out.println("Коллекция загружена!");
                 return collection;
-            } //catch (FileNotFoundException exception) {
-               // System.err.println("Файл не найден! Коллекция будет создана автоматически.");}
+            } catch (FileNotFoundException exception) {
+                System.err.println("Файл не найден! Коллекция будет создана автоматически.");}
             catch (NoSuchElementException exception) {
                 System.err.println("Файл пуст!");
             }

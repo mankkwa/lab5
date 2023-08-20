@@ -16,7 +16,6 @@ public class Organization implements Comparable<Organization>{
     private Address postalAddress; //Поле не может быть null
 
     public Organization(String name, Coordinates coordinates, Float annualTurnover, String fullName, Integer employeesCount, OrganizationType type, Address postalAddress) {
-        creationDate = ZonedDateTime.now();
         this.name = name;
         this.coordinates = coordinates;
         this.annualTurnover = annualTurnover;
@@ -24,9 +23,6 @@ public class Organization implements Comparable<Organization>{
         this.employeesCount = employeesCount;
         this.type = type;
         this.postalAddress = postalAddress;
-    }
-
-    public Organization(int askId, String name, Coordinates coordinates, ZonedDateTime creationDate, Float annualTurnover, OrganizationType askType, Integer employeesCount, Address askPostalAddress, String askFullName) {
     }
 
     public Organization() {
@@ -115,16 +111,16 @@ public class Organization implements Comparable<Organization>{
 
     @Override
     public String toString() {
-        return "Organization\n" +
-                "\tid=" + id +
-                "\n\tname=" + name +
-                "\n\tcoordinates= " + coordinates +
-                "\n\tcreationDate=" + creationDate +
-                "\n\tannualTurnover=" + annualTurnover +
-                "\n\tfullName=" + fullName +
-                "\n\temployeesCount=" + employeesCount +
-                "\n\ttype=" + type +
-                "\n\tpostalAddress= " + postalAddress;
+        return "id=" + id +
+                ",\nname = " + name +
+                ",\ncoordinates = " + coordinates +
+                ",\ncreationDate = " + creationDate +
+                ",\nannualTurnover = " + annualTurnover +
+                ",\nfullName = " + fullName +
+                ",\nemployeesCount = " + employeesCount +
+                ",\ntype = " + type +
+                ",\npostalAddress = " + postalAddress +
+                '\n';
     }
 
 
@@ -144,11 +140,6 @@ public class Organization implements Comparable<Organization>{
         int coordinatesComparison = this.coordinates.compareTo(other.coordinates);
         if (coordinatesComparison != 0){
             return coordinatesComparison;
-        }
-
-        int creationDateComparison = this.creationDate.compareTo(other.creationDate);
-        if (creationDateComparison != 0) {
-            return creationDateComparison;
         }
 
         int annualTurnoverComparison = Float.compare(this.annualTurnover, other.annualTurnover);

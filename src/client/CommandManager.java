@@ -12,6 +12,7 @@ import models.exceptions.EndException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -29,6 +30,7 @@ public class CommandManager {
             new Exit(),
             new Save(),
             new Show(),
+            new RemoveById(),
     };
     /**
      * whichFunction - функция для работы с запросом пользователя
@@ -37,6 +39,7 @@ public class CommandManager {
         Organization org = new Organization();
         AskIn ask = new AskIn();
         DAO collection = new PriorityQueueDAO();
+        Long id = 1L;
         switch (commandIndex){
             case 0:
                 System.out.println("< Вызвана команда add >");
@@ -53,7 +56,6 @@ public class CommandManager {
                 break;
             case 2:
                 System.out.println("< Вызвана команда update >");
-                Long id = 1L;
                 try{
                     id = ask.askId(ih);
                 } catch (EndException e){
@@ -84,6 +86,19 @@ public class CommandManager {
                 break;
             case 5:
                 System.out.println("< Вызвана команда show >");
+                break;
+            case 6:
+                System.out.println("< Вызвана команда remove_by_id >");
+                    try {
+                        id = ask.askId(ih);
+                    } catch (EndException e) {
+                        System.err.println(e.getMessage());
+                    }
+                    if (priorityQueueDAO.get(id) != null) {
+                        return priorityQueueDAO.get(id);
+                    } else {
+                        System.err.println("Такого элемента нет!");
+                    }
                 break;
         }
         return org;

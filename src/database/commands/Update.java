@@ -24,6 +24,7 @@ public class Update implements Command {
             System.out.println("Элемент не будет обновлён, ведь такого id не существует :(");
         } else {
             priorityQueueDAO.update(id, org);
+            priorityQueueDAO.sort();
             System.out.print("Элемент обновлён :)\n");
         }
     }

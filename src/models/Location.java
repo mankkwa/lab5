@@ -69,10 +69,11 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location" +
-                "\n\t\t\tx=" + x +
-                "\n\t\t\ty=" + y +
-                "\n\t\t\tz=" + z +
-                "\n\t\t\tname=" + name;
+        return "Location (" +
+                "x = " + x +
+                ", y = " + y +
+                ", z = " + z +
+                ", name = " + name +
+        ')';
     }
 }

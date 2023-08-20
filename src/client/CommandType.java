@@ -9,5 +9,6 @@ public enum CommandType {
     UPDATE,
     EXIT,
     SAVE,
-    SHOW;
+    SHOW,
+    REMOVE_BY_ID;
 }

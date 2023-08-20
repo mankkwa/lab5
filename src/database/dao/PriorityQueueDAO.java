@@ -2,6 +2,7 @@ package database.dao;
 
 import client.Generator;
 import database.FileManager;
+import database.OrganizationComparator;
 import models.Organization;
 
 import java.time.ZonedDateTime;
@@ -9,9 +10,10 @@ import java.util.*;
 
 public final class PriorityQueueDAO implements DAO {
     private static PriorityQueueDAO pqd = new PriorityQueueDAO();
-    private static PriorityQueue<Organization> collection = new PriorityQueue<>();
+    private static Queue<Organization> collection = new PriorityQueue<>();
     private static Long availableId = 1L;
     private final ZonedDateTime initDate;
+    private static OrganizationComparator orgComp;
     private static final Generator generator = new Generator();
 
     public PriorityQueueDAO(){
@@ -49,7 +51,7 @@ public final class PriorityQueueDAO implements DAO {
     @Override
     public void remove(Long id) {
         Organization thatOrganization = get(id);
-        if (thatOrganization!=null){
+        if (thatOrganization != null){
             collection.remove(thatOrganization);
         }
     }
@@ -61,12 +63,7 @@ public final class PriorityQueueDAO implements DAO {
 
     @Override
     public Organization get(Long id) {
-        for (Organization organization: collection){
-            if (Objects.equals(organization.getId(), id)){
-                return organization;
-            }
-        }
-        return null;
+        return collection.stream().filter(humanBeing -> humanBeing.getId() == id).findFirst().orElse(null);
     }
 
     @Override
@@ -92,6 +89,10 @@ public final class PriorityQueueDAO implements DAO {
 
     @Override
     public void sort(){
+        Organization[] organizations = collection.toArray(new Organization[0]);
+        Arrays.sort(organizations, orgComp);
+        collection.clear();
+        collection.addAll(Arrays.asList(organizations));
     }
 
     @Override
