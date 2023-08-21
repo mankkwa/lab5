@@ -40,13 +40,14 @@ public class FileManager {
                     builder.append(scanner.next());
                 }
                 //тута происходит десериализация строки builder.toString() в массив organization
-                //потом просто преобразуем в список, тк приорити куеуе не умеет так, а потом уже с addAll все добавляем
+                //потом просто преобразуем в список, тк приорити куеуе не умеет так,
+                // а потом уже с addAll все добавляем в коллекцию
                 collection.addAll(Arrays.asList(gson.fromJson(builder.toString(), Organization[].class)));
                 System.out.println("Коллекция загружена!");
                 return collection;
             } catch (FileNotFoundException exception) {
                 System.err.println("Файл не найден! Коллекция будет создана автоматически.");}
-            catch (NoSuchElementException exception) {
+            catch (NullPointerException exception) {
                 System.err.println("Файл пуст!");
             }
         } else System.err.println("Данный файл не найден!");

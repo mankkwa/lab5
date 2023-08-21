@@ -5,12 +5,14 @@ import database.FileManager;
 import database.OrganizationComparator;
 import models.Organization;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.*;
 
 public final class PriorityQueueDAO implements DAO {
     private static PriorityQueueDAO pqd = new PriorityQueueDAO();
-    private static Queue<Organization> collection = new PriorityQueue<>();
+    private static PriorityQueue<Organization> collection = new PriorityQueue<>();
     private static Long availableId = 1L;
     private final ZonedDateTime initDate;
     private static OrganizationComparator orgComp;
@@ -18,6 +20,7 @@ public final class PriorityQueueDAO implements DAO {
 
     public PriorityQueueDAO(){
         initDate = ZonedDateTime.now();
+        //pqd.readCollection();
     }
 
     @Override
@@ -97,10 +100,16 @@ public final class PriorityQueueDAO implements DAO {
 
     @Override
     public void saveCollectionToFile(String output) {
+        try (FileWriter writer = new FileWriter(output)) {
+            // Очистить файл, записывая пустую строку
+            writer.write("");
         FileManager.writeCollection(pqd.getAll(), output);
+    } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    @Override
+        @Override
     public void readCollection(String input){
         collection = FileManager.readCollection(input);
     }

@@ -7,15 +7,16 @@ import models.Organization;
 import models.exceptions.EndException;
 
 public class RemoveById implements Command{
-    private static PriorityQueueDAO dao;
+    private PriorityQueueDAO dao = new PriorityQueueDAO();
     @Override
-    public void execute(Object obj) throws EndException {
-        Organization organization = (Organization) obj;
-        Long id = organization.getId();
-        if(id != null) {
-            dao.remove(id);
+    public void execute(Object obj) {
+        Organization org = (Organization) obj;
+        if(dao.get(org.getId()) != null) {
+            dao.remove(org.getId());
             dao.sort();
             System.out.println("Элемент был удален!");
+        } else {
+            throw new NullPointerException();
         }
 
     }

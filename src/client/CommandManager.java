@@ -12,7 +12,6 @@ import models.exceptions.EndException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -26,7 +25,7 @@ public class CommandManager {
     public static final Command[] commands = {
             new Add(),
             new Clear(),
-            new Update(),
+            new Update(priorityQueueDAO),
             new Exit(),
             new Save(),
             new Show(),
@@ -38,7 +37,7 @@ public class CommandManager {
     public static Organization whichFunction (int commandIndex, String fileName) throws EndException {
         Organization org = new Organization();
         AskIn ask = new AskIn();
-        DAO collection = new PriorityQueueDAO();
+        PriorityQueueDAO collection = new PriorityQueueDAO();
         Long id = 1L;
         switch (commandIndex){
             case 0:
@@ -63,6 +62,7 @@ public class CommandManager {
                 }
                 if (collection.get(id) != null){
                     try{
+                    org.setId(id);
                     org.setName(ask.askName(ih));
                     org.setType(ask.askType(ih));
                     org.setPostalAddress(ask.askPostalAddress(ih));
@@ -83,6 +83,7 @@ public class CommandManager {
             case 4:
                 System.out.println("< Вызвана команда save >");
                 priorityQueueDAO.saveCollectionToFile(fileName);
+
                 break;
             case 5:
                 System.out.println("< Вызвана команда show >");
@@ -94,8 +95,9 @@ public class CommandManager {
                     } catch (EndException e) {
                         System.err.println(e.getMessage());
                     }
-                    if (priorityQueueDAO.get(id) != null) {
-                        return priorityQueueDAO.get(id);
+                    if (collection.get(id) != null) {
+                        collection.get(id).setId(id);
+                        return collection.get(id);
                     } else {
                         System.err.println("Такого элемента нет!");
                     }
@@ -107,7 +109,7 @@ public class CommandManager {
     public static void whichCommand(String fileName) throws Exception{
         String command = null;
         String typeOfInput;
-        System.out.println("Выбери файл или консоль:");
+        System.out.println("Выбери файл(1) или консоль(2):");
        try {
             File file = new File("C:\\Users\\mankk\\Учеба\\2 семестр\\lab5\\src\\m.txt");
             Scanner scForFile = new Scanner(file);
@@ -115,10 +117,10 @@ public class CommandManager {
             typeOfInput = scanner.nextLine();
 
             if (!typeOfInput.isEmpty()){
-                if (typeOfInput.equals("консоль")) {
+                if (typeOfInput.equals("консоль")||typeOfInput.equals("2")) {
                     ih = new ConsoleInputHandler();
                     command = AskIn.askCommand(ih);
-                } else if (typeOfInput.equals("файл")){
+                } else if (typeOfInput.equals("файл")||typeOfInput.equals("1")){
                     ih = new FileInputHandler(scForFile);
                     if (!scForFile.hasNextLine()){
                         throw new IOException();
