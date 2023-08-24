@@ -19,12 +19,15 @@ public class Update implements Command {
         Organization org = (Organization) newObject;
         //тут вроде мы получаем айди переданного сюда org и если он null, то элемент не будет обновлен
         //в ином случае - обновлен
-        if (priorityQueueDAO.get(org.getId()) == null){
-            System.out.println("Элемент не будет обновлён, ведь такого id не существует :(");
-        } else {
-            priorityQueueDAO.update(org.getId(), org);
-            priorityQueueDAO.sort();
-            System.out.print("Элемент обновлён :)\n");
+        try {
+            if (priorityQueueDAO.get(org.getId()) != null){
+                priorityQueueDAO.update(org.getId(), org);
+                priorityQueueDAO.sort();
+                System.out.print("Элемент обновлён :)\n");
+            }
+        } catch (NullPointerException e){
+            System.err.println(e.getMessage());
         }
+
     }
 }

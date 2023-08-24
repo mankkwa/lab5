@@ -15,8 +15,14 @@ public class Add implements Command {
     @Override
     public void execute (Object newObject) {
             Organization org = (Organization) newObject;
-            priorityQueueDAO.add(org);
-            priorityQueueDAO.sort();
-            System.out.println("Элемент добавлен в коллекцию!");
+            try {
+                if (org != null) {
+                    priorityQueueDAO.add(org);
+                    priorityQueueDAO.sort();
+                    System.out.println("Элемент добавлен в коллекцию!");
+                }
+            }catch (NullPointerException e){
+                System.err.println(e.getMessage());
+            }
         }
 }

@@ -1,27 +1,30 @@
 package client.handlers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import client.ReaderManager;
+
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class FileInputHandler extends InputHandler {
-    private final Scanner scanner;
+    private final BufferedInputStream bufferedInput;
 
-    public FileInputHandler(Scanner scanner) {
-        this.scanner = scanner;
+
+    public FileInputHandler(BufferedInputStream bufferedInput) {
+        this.bufferedInput = bufferedInput;
     }
-    @Override
-    public String readInput() {
-        String line = "";
-        try {
-            while (scanner.hasNextLine()) {
-                line = scanner.nextLine().trim();
-                //.trim() осуществляет обрезание пробелов
-            }
 
-        } finally {
-            scanner.close();
+    @Override
+    public String readInput() throws IOException {
+        String line = "";
+        int i;
+        while ((i = bufferedInput.read()) != -1) {
+            if (i != '\n' && i != '\r') {
+                line += (char) i;
+            } else if (i == '\n') break;
+        } if (i==-1){
+            ReaderManager.returnOnPreviousReader();
+            ReaderManager.removeLast();
         }
         return line.split(" ")[0];
     }

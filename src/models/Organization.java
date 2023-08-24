@@ -132,6 +132,10 @@ public class Organization implements Comparable<Organization>{
     @Override
     public int compareTo(Organization other) {
 
+        if (other == null){
+            return -1;
+        }
+
         int nameComparison = this.name.compareTo(other.name);
         if (nameComparison != 0) {
             return nameComparison;

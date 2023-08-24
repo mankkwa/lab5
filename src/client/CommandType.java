@@ -10,5 +10,6 @@ public enum CommandType {
     EXIT,
     SAVE,
     SHOW,
-    REMOVE_BY_ID;
+    REMOVE_BY_ID,
+    EXECUTE_SCRIPT;
 }
