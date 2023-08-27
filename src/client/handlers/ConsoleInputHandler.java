@@ -1,6 +1,5 @@
 package client.handlers;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ConsoleInputHandler extends InputHandler{

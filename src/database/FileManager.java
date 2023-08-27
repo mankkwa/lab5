@@ -27,7 +27,7 @@ public class FileManager {
         } else System.err.println("Данный файл не найден!");
     }
 
-    public static PriorityQueue<Organization> readCollection(String input){
+    public static PriorityQueue<Organization> readCollection(String input) {
         if (input != null) {
             try {
                 Scanner scanner = new Scanner(new File(input));
@@ -36,7 +36,7 @@ public class FileManager {
                 PriorityQueue<Organization> collection = new PriorityQueue<>();
                 //здесь просто по сути склеиваем из говна и палок одну целую строку, пока сканер что то видит
                 //append - как раз таки им и склеиваем
-                while (scanner.hasNext()){
+                while (scanner.hasNext()) {
                     builder.append(scanner.next());
                 }
                 //тута происходит десериализация строки builder.toString() в массив organization
@@ -46,11 +46,13 @@ public class FileManager {
                 System.out.println("Коллекция загружена!");
                 return collection;
             } catch (FileNotFoundException exception) {
-                System.err.println("Файл не найден! Коллекция будет создана автоматически.");}
-            catch (NullPointerException exception) {
+                System.err.println("Файл не найден! Коллекция будет создана автоматически.");
+            } catch (NoSuchElementException exception) {
                 System.err.println("Файл пуст!");
+            } catch (JsonParseException | NullPointerException exception) {
+                System.err.println("Некорректные данные!");
             }
-        } else System.err.println("Данный файл не найден!");
-        return new PriorityQueue<>();
+        } else System.err.println("Аргумент командной строки не был передан!");
+            return new PriorityQueue<>();
+        }
     }
-}

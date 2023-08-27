@@ -1,8 +1,6 @@
-show
-show
 add
-1
-1
+_
+public
 3
 45
 5
@@ -13,4 +11,3 @@ add
 10
 11
 12
-save

@@ -5,7 +5,6 @@ import client.handlers.FileInputHandler;
 import client.handlers.InputHandler;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.util.ArrayList;
 
 public class ReaderManager {

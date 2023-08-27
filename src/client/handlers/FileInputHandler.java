@@ -4,7 +4,6 @@ import client.ReaderManager;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class FileInputHandler extends InputHandler {
     private final BufferedInputStream bufferedInput;

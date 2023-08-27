@@ -21,7 +21,7 @@ public class Add implements Command {
                     priorityQueueDAO.sort();
                     System.out.println("Элемент добавлен в коллекцию!");
                 }
-            }catch (NullPointerException e){
+            } catch (NullPointerException e){
                 System.err.println(e.getMessage());
             }
         }
