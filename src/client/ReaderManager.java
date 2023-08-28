@@ -16,11 +16,8 @@ public class ReaderManager {
     }
 
     public static void turnOnConsole() {
-        // новый экземпляр класса считывания
         handler = new ConsoleInputHandler();
-        // добавляем в массив хендлеров, чтобы потом к нему вернуться
         handlers.add(handler);
-        // Возврат к дружественному интерфейсу после считывания с файла, если оно было
         AskIn.returnFriendly();
     }
 

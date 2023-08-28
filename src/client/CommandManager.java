@@ -1,6 +1,7 @@
 package client;
 
 import client.ReaderManager.*;
+import client.handlers.ConsoleInputHandler;
 import database.commands.*;
 import database.dao.PriorityQueueDAO;
 import models.Address;
@@ -39,11 +40,6 @@ public class CommandManager {
             new CountGreaterThanPostalAddress(),
     };
 
-    private static void printMessage(String message){
-        if (FRIEND_DETECTOR) {
-            System.out.println(message);
-        }
-    }
 
     /**
      * whichFunction - функция для работы с запросом пользователя
@@ -55,7 +51,7 @@ public class CommandManager {
         Long id = 1L;
         switch (commandIndex){
             case 0:
-                printMessage("< Вызвана команда add >");
+                printMessageClass("< Вызвана команда add >");
                 try {
                     org.setName(ask.askName(ReaderManager.getHandler()));
                     org.setType(ask.askType(ReaderManager.getHandler()));
@@ -71,10 +67,10 @@ public class CommandManager {
                 }
                 break;
             case  1:
-                printMessage("< Вызвана команда clear >");
+                printMessageClass("< Вызвана команда clear >");
                 break;
             case 2:
-                printMessage("< Вызвана команда update >");
+                printMessageClass("< Вызвана команда update >");
                     try{
                         id = ask.askId(ReaderManager.getHandler());
                         if (collection.get(id) != null){
@@ -99,17 +95,17 @@ public class CommandManager {
                     }
                 break;
             case 3:
-                printMessage("< Вызвана команда exit >");
+                printMessageClass("< Вызвана команда exit >");
                 break;
             case 4:
-                printMessage("< Вызвана команда save >");
+                printMessageClass("< Вызвана команда save >");
                 priorityQueueDAO.saveCollectionToFile(fileName);
                 break;
             case 5:
-                printMessage("< Вызвана команда show >");
+                printMessageClass("< Вызвана команда show >");
                 break;
             case 6:
-                printMessage("< Вызвана команда remove_by_id >");
+                printMessageClass("< Вызвана команда remove_by_id >");
                     try {
                         id = ask.askId(ReaderManager.getHandler());
                         if (collection.get(id) != null) {
@@ -123,7 +119,7 @@ public class CommandManager {
                     }
                 break;
             case 7:
-                printMessage("< Вызвана команда execute_script >");
+                printMessageClass("< Вызвана команда execute_script >");
                 try {
                     FileInputStream fileInputStream = ask.askFileName(ReaderManager.getHandler());
                     BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
@@ -133,7 +129,7 @@ public class CommandManager {
                 }
                 break;
             case 8:
-                printMessage("< Вызвана команда execute_script >");
+                printMessageClass("< Вызвана команда execute_script >");
                 try {
                     return new Organization(
                             ask.askName(ReaderManager.getHandler()),
@@ -149,22 +145,22 @@ public class CommandManager {
                 }
                 break;
             case 9:
-                printMessage("< Вызвана команда help >");
+                printMessageClass("< Вызвана команда help >");
                 break;
             case 10:
-                printMessage("< Вызвана команда remove_first >");
+                printMessageClass("< Вызвана команда remove_first >");
                 break;
             case 11:
-                printMessage("< Вызвана команда average_of_annual_turnover >");
+                printMessageClass("< Вызвана команда average_of_annual_turnover >");
                 break;
             case 12:
-                printMessage("< Вызвана команда print_unique_full_name >");
+                printMessageClass("< Вызвана команда print_unique_full_name >");
                 break;
             case 13:
-                printMessage("< Вызвана команда count_greater_than_postal_address >");
+                printMessageClass("< Вызвана команда count_greater_than_postal_address >");
                 try {
                     Address postalAddress = ask.askPostalAddress(ReaderManager.getHandler());
-                    return postalAddress;
+                    org.setPostalAddress(postalAddress);
                 } catch (EndException e){
                     System.err.println(e.getMessage());
                 }
@@ -174,7 +170,7 @@ public class CommandManager {
     }
 
     public static void whichCommand(String fileName){
-        String command = null;
+        String command;
         try {
             command = AskIn.askCommand(ReaderManager.getHandler());
         } catch (EndException | ReaderException e){
@@ -187,7 +183,7 @@ public class CommandManager {
         try {
             o = whichFunction(commandIndex, fileName);
         } catch (EndException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
         commands[commandIndex].execute(o);
         whichCommand(fileName);

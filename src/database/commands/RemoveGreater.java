@@ -18,7 +18,7 @@ public class RemoveGreater implements Command{
             pqd.sort();
             System.out.println("Удаление прошло успешно!");
         } catch (NullPointerException e){
-            System.out.println(e.getMessage());
+            System.out.println("remove_greater: Удаление не удалось.");
         }
 
     }

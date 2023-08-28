@@ -9,20 +9,19 @@ public class CountGreaterThanPostalAddress implements Command{
 
     @Override
     public void execute(Object obj) {
-        Address postalAddress = (Address) obj;
+        Organization organization = (Organization) obj;
+        Address postalAddress = organization.getPostalAddress();
         int i = 0;
         try {
-            for(Organization organization : pqd.getAll()){
-                Address higherAddress = organization.getPostalAddress();
+            for(Organization organizationField : pqd.getAll()){
+                Address higherAddress = organizationField.getPostalAddress();
                 if (postalAddress.compareTo(higherAddress) < 0){
                     i++;
                 }
             }
             System.out.println("Количество элементов, превышающих postalAddress равно: " + i);
         } catch (NullPointerException e){
-            System.err.println("Элемента, меньше заданного, не нашлось");
+            System.err.println("count_greater_than_postal_address: Ничего найти не удалось :(");
         }
-
-
     }
 }

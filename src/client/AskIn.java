@@ -20,7 +20,7 @@ import java.util.Objects;
 
 
 public class AskIn {
-    public static boolean FRIEND_DETECTOR;
+    private static boolean FRIEND_DETECTOR;
     private static boolean friendlyInterface;
     private static ArrayList<String> historyOfFiles = new ArrayList<String>();
 
@@ -57,7 +57,7 @@ public class AskIn {
     public static String askCommand(InputHandler ih) throws EndException, ReaderException {
         String command = null;
         while (command == null) {
-            printMessage(ih, "Введите команду: ");
+            printMessageClass("Введите команду: ");
             try {
                 command = ih.readInput();
                 CommandType.valueOf(command.toUpperCase()).ordinal();
@@ -71,7 +71,7 @@ public class AskIn {
                     command = null;
                 } else if (ih != ReaderManager.getHandler() && Objects.equals(command, "")) {
                     throw new ReaderException("");
-                } else throw new EndException("Команды "+ command + " не существует\n");
+                } else throw new EndException("Команды "+ command + " не существует!");
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
                 throw new EndException("Невозможно прочитать данные из файла.\n");
@@ -100,7 +100,7 @@ public class AskIn {
                     }
                     inputId = null;
                 } else {
-                    throw new EndException("Поле введено неверно. Команда будет проигнорирована.\n");
+                    throw new EndException("Поле ID введено неверно. Команда будет проигнорирована.");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -126,7 +126,7 @@ public class AskIn {
                     System.err.println("Ты ввел пустоту!");
                     inputName = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля name. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -152,13 +152,13 @@ public class AskIn {
             } catch (NumberFormatException e) {
                 if (friendlyInterface && ih.getClass() == ConsoleInputHandler.class) {
                     if (!inputCoordinates.isEmpty()) {
-                        System.err.println("Некорректный ввод поля!");
+                        System.err.println("Некорректный ввод поля x!");
                     } else {
                         System.err.println("Ты ввел пустоту!");
                     }
                     inputCoordinates = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля x. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -182,7 +182,7 @@ public class AskIn {
                     }
                     inputCoordinates = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля y. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -215,7 +215,7 @@ public class AskIn {
                     }
                     inputAnnualTurnover = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля annualTurnover. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -246,7 +246,7 @@ public class AskIn {
                     }
                     inputFullName = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля fullName. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -276,7 +276,7 @@ public class AskIn {
                     }
                     inputEmployeesCount = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля employeesCount. Команда будет проигнорирована!");
                 }
             }catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -306,7 +306,7 @@ public class AskIn {
                     }
                     inputOrgType = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля type. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -338,7 +338,7 @@ public class AskIn {
                     }
                     inputPostalAddress = null;
                 } else{
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!");
+                    throw new EndException("Некорректный ввод поля postalAddress. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -363,7 +363,7 @@ public class AskIn {
                     }
                     inputPostalAddress = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля x. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -387,7 +387,7 @@ public class AskIn {
                     }
                     inputPostalAddress = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля y. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -411,7 +411,7 @@ public class AskIn {
                     }
                     inputPostalAddress = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля z. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -434,7 +434,7 @@ public class AskIn {
                     }
                     inputPostalAddress = null;
                 } else {
-                    throw new EndException("Некорректный ввод поля. Команда будет проигнорирована!\n");
+                    throw new EndException("Некорректный ввод поля name. Команда будет проигнорирована!");
                 }
             } catch (IOException e){
                 ReaderManager.returnOnPreviousReader();
@@ -479,8 +479,8 @@ public class AskIn {
             System.out.println(message);
         }
     }
-    private static void printMessage(InputHandler in, String message){
-        if (friendlyInterface && in.getClass() == ConsoleInputHandler.class) {
+    public static void printMessageClass(String message){
+        if (friendlyInterface && ReaderManager.getHandler().getClass() == ConsoleInputHandler.class) {
             System.out.println(message);
         }
     }
