@@ -114,4 +114,25 @@ public final class PriorityQueueDAO implements DAO {
         collection = FileManager.readCollection(input);
     }
 
+    public void removeGreater(Organization organization) {
+        for (Organization organization1 : pqd.getAll()) {
+            if (organization1.compareTo(organization) > 0) {
+                pqd.remove(organization1.getId());
+            }
+        }
+    }
+
+    public Organization firstOrganization(){
+        return collection.peek();
+    }
+
+    public Float averageOfAnnual() {
+        Float averageOfAnnual = null;
+        int n = 0;
+        for (Organization organization : pqd.getAll()) {
+            averageOfAnnual += organization.getAnnualTurnover();
+            n += 1;
+        }
+        return averageOfAnnual / n;
+    }
 }

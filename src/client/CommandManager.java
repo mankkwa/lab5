@@ -30,6 +30,12 @@ public class CommandManager {
             new Show(),
             new RemoveById(),
             new ExecuteScript(),
+            new RemoveGreater(),
+            new Help(),
+            new RemoveFirst(),
+            new AverageOfAnnualTurnover(),
+            new PrintUniqueFullName(),
+            new CountGreaterThanPostalAddress()
     };
 
     private static void printMessage(String message){
@@ -124,6 +130,34 @@ public class CommandManager {
                 } catch (EndException e){
                     System.err.print(e.getMessage());
                 }
+                break;
+            case 8:
+                printMessage("< Вызвана команда execute_script >");
+                try {
+                    return new Organization(
+                            ask.askName(ReaderManager.getHandler()),
+                            ask.askCoordinates(ReaderManager.getHandler()),
+                            ask.askAnnualTurnover(ReaderManager.getHandler()),
+                            ask.askFullName(ReaderManager.getHandler()),
+                            ask.askEmployeesCount(ReaderManager.getHandler()),
+                            ask.askType(ReaderManager.getHandler()),
+                            ask.askPostalAddress(ReaderManager.getHandler())
+                    );
+                } catch (EndException e){
+                    System.err.println(e.getMessage());
+                }
+                break;
+            case 9:
+                printMessage("< Вызвана команда help >");
+                break;
+            case 10:
+                printMessage("< Вызвана команда remove_first >");
+                break;
+            case 11:
+                printMessage("< Вызвана команда average_of_annual_turnover >");
+                break;
+            case 12:
+                printMessage("< Вызвана команда print_unique_full_name >");
                 break;
         }
         return org;

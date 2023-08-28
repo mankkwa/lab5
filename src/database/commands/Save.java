@@ -11,7 +11,5 @@ public class Save implements Command{
     @Override
     public void execute(Object obj) {
             pqd.sort();
-
-
     }
 }

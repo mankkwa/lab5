@@ -26,7 +26,6 @@ public class Organization implements Comparable<Organization>{
     }
 
     public Organization() {
-
     }
 
     public static long getCurrentId() {
