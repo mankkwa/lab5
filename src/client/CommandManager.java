@@ -3,6 +3,7 @@ package client;
 import client.ReaderManager.*;
 import database.commands.*;
 import database.dao.PriorityQueueDAO;
+import models.Address;
 import models.Organization;
 import models.exceptions.EndException;
 import models.exceptions.ReaderException;
@@ -35,7 +36,7 @@ public class CommandManager {
             new RemoveFirst(),
             new AverageOfAnnualTurnover(),
             new PrintUniqueFullName(),
-            new CountGreaterThanPostalAddress()
+            new CountGreaterThanPostalAddress(),
     };
 
     private static void printMessage(String message){
@@ -158,6 +159,15 @@ public class CommandManager {
                 break;
             case 12:
                 printMessage("< Вызвана команда print_unique_full_name >");
+                break;
+            case 13:
+                printMessage("< Вызвана команда count_greater_than_postal_address >");
+                try {
+                    Address postalAddress = ask.askPostalAddress(ReaderManager.getHandler());
+                    return postalAddress;
+                } catch (EndException e){
+                    System.err.println(e.getMessage());
+                }
                 break;
         }
         return org;
