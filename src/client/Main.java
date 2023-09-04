@@ -1,6 +1,5 @@
 package client;
 
-import client.handlers.ConsoleInputHandler;
 import database.dao.PriorityQueueDAO;
 
 public class Main {
@@ -14,6 +13,7 @@ public class Main {
             System.err.println("Информация о аргументе командной строки отсутствует. Работа прекращена.");
             System.exit(0);
         }
+
         pqd.readCollection(output);
         AskIn.chooseFriendly();
         ReaderManager.turnOnConsole();

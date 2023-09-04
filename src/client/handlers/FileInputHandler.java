@@ -8,7 +8,6 @@ import java.io.IOException;
 public class FileInputHandler extends InputHandler {
     private final BufferedInputStream bufferedInput;
 
-
     public FileInputHandler(BufferedInputStream bufferedInput) {
         this.bufferedInput = bufferedInput;
     }

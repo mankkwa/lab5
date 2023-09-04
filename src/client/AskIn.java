@@ -176,7 +176,7 @@ public class AskIn {
             } catch (NumberFormatException e) {
                 if (friendlyInterface && ih.getClass() == ConsoleInputHandler.class) {
                     if (!inputCoordinates.isEmpty()) {
-                        System.err.println("Некорректный ввод поля y!");
+                        System.err.println("Некорректный ввод поля y! (y <= 873)");
                     } else {
                         System.err.println("Ты ввел пустоту!");
                     }
@@ -241,7 +241,7 @@ public class AskIn {
                     if (!inputFullName.isEmpty()) {
                         System.err.println("Некорректный ввод поля fullName!");
                     } else {
-                        System.err.println("\u001B[33Ты ввел пустоту! Поэтому поле примет значение null >:)\u001B[0m");
+                        System.err.println("Ты ввел пустоту! Поэтому поле примет значение null >:)");
                         return null;
                     }
                     inputFullName = null;
@@ -485,5 +485,3 @@ public class AskIn {
         }
     }
     }
-
-

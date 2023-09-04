@@ -1,11 +1,7 @@
 package database;
 
 import client.Converter;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.google.gson.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Organization;
 
 import java.io.*;

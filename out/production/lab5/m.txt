@@ -21,4 +21,6 @@ l
 kl
 lko
 8
+execute_script
+C:\Users\mankk\lab5\src\t.txt
 print_unique_full_name

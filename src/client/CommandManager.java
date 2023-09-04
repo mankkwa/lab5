@@ -1,7 +1,5 @@
 package client;
 
-import client.ReaderManager.*;
-import client.handlers.ConsoleInputHandler;
 import database.commands.*;
 import database.dao.PriorityQueueDAO;
 import models.Address;
@@ -10,7 +8,6 @@ import models.exceptions.EndException;
 import models.exceptions.ReaderException;
 
 
-import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 
 import static client.AskIn.*;
@@ -120,16 +117,16 @@ public class CommandManager {
                 break;
             case 7:
                 printMessageClass("< Вызвана команда execute_script >");
+                FileInputStream fileInputStream = null;
                 try {
-                    FileInputStream fileInputStream = ask.askFileName(ReaderManager.getHandler());
-                    BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
-                    return bufferedInputStream;
+                   fileInputStream = ask.askFileName(ReaderManager.getHandler());
+                   return fileInputStream;
                 } catch (EndException e){
                     System.err.print(e.getMessage());
+                    return null;
                 }
-                break;
             case 8:
-                printMessageClass("< Вызвана команда execute_script >");
+                printMessageClass("< Вызвана команда remove_greater >");
                 try {
                     return new Organization(
                             ask.askName(ReaderManager.getHandler()),

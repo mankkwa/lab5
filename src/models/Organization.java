@@ -164,6 +164,17 @@ public class Organization implements Comparable<Organization>{
         if (typeComparison != 0){
             return typeComparison;
         }
+
+        int creationDateComparison = this.creationDate.compareTo(other.creationDate);
+        if (creationDateComparison != 0){
+            return creationDateComparison;
+        }
+
+        int idComparison = this.id.compareTo(other.id);
+        if (idComparison != 0){
+            return idComparison;
+        }
+
         return this.postalAddress.compareTo(other.postalAddress);
     }
 
