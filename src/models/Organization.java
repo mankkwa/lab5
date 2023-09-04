@@ -4,7 +4,6 @@ package models;
 import java.time.ZonedDateTime;
 
 public class Organization implements Comparable<Organization>{
-    public static long CurrentId = 1;
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -26,14 +25,6 @@ public class Organization implements Comparable<Organization>{
     }
 
     public Organization() {
-    }
-
-    public static long getCurrentId() {
-        return CurrentId;
-    }
-
-    public static void setCurrentId(long currentId) {
-        CurrentId = currentId;
     }
 
     public Long getId() {

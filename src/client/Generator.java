@@ -3,15 +3,15 @@ package client;
 import models.Organization;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 /**
  * Класс для генерации айдишника
  */
 public class Generator {
-    private static int availableId = 1;
 
     public void generateID(Organization org){
-        org.setId((long) availableId++);
+        org.setId(Long.valueOf(UUID.randomUUID().toString()));
     }
 
     public void generateCreationDate(Organization org){

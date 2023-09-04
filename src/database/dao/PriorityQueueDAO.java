@@ -13,7 +13,7 @@ import java.util.*;
 public final class PriorityQueueDAO implements DAO {
     private static PriorityQueueDAO pqd = new PriorityQueueDAO();
     private static PriorityQueue<Organization> collection = new PriorityQueue<>();
-    private static Long availableId = 1L;
+    private static Long availableId = 0L;
     private final ZonedDateTime initDate;
     private static OrganizationComparator orgComp;
     private static final Generator generator = new Generator();
@@ -31,9 +31,28 @@ public final class PriorityQueueDAO implements DAO {
     @Override
     public Long add(Organization organization){
         collection.add(organization);
-        generator.generateID(organization);
-        generator.generateCreationDate(organization);
+        organization.setId(availableId);
+        organization.setCreationDate(ZonedDateTime.now());
         return availableId++;
+    }
+
+    public void setAvailableId(){
+        if (collection.isEmpty()){
+            availableId = 0L;
+        } else {
+            availableId = getMaxId() + 1;
+        }
+    }
+
+    public Long getMaxId(){
+        Long maxId = null;
+        for (Organization org : collection){
+            Long orgId = org.getId();
+            if(orgId != null && (maxId == null || orgId > maxId)){
+                maxId = orgId;
+            }
+        }
+        return maxId;
     }
 
     @Override

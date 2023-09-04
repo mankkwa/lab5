@@ -1,6 +1,7 @@
 package client;
 
 import database.commands.*;
+import database.dao.DAO;
 import database.dao.PriorityQueueDAO;
 import models.Address;
 import models.Organization;
@@ -19,6 +20,10 @@ import static client.AskIn.*;
 public class CommandManager {
 
     private static PriorityQueueDAO priorityQueueDAO = new PriorityQueueDAO();
+
+    static {
+        priorityQueueDAO.setAvailableId();
+    }
 
     public static final Command[] commands = {
             new Add(),
